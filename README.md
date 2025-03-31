@@ -1,0 +1,1 @@
+Plugin que extiende la funcionalidad del plugin BookingPress para cancelar las reservas pendientes automáticamente
