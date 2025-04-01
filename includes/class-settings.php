@@ -13,9 +13,28 @@ class Conditions_BookingPress_Settings {
             'default' => array(
                 'email_enabled' => 0,
                 'email_subject' => '',
-                'email_content' => ''
+                'email_content' => '',
+                'min_hours_cancel' => 48
+
             )
         ));
+
+
+	    // Nueva sección de configuración de cancelación
+	    add_settings_section(
+		    'conditions_bookingpress_cancel_section',
+		    __( 'Configuración de Cancelación', 'conditions-bookingpress' ),
+		    null,
+		    'conditions_bookingpress_settings'
+	    );
+
+	    add_settings_field(
+		    'conditions_bookingpress_min_hours_cancel',
+		    __( 'Horas mínimas para cancelación automática', 'conditions-bookingpress' ),
+		    array( __CLASS__, 'min_hours_cancel_callback' ),
+		    'conditions_bookingpress_settings',
+		    'conditions_bookingpress_cancel_section'
+	    );
 
         add_settings_section(
             'conditions_bookingpress_email_section',
@@ -74,6 +93,12 @@ class Conditions_BookingPress_Settings {
         echo '<textarea name="conditions_bookingpress_options[email_content]" rows="10" cols="50" class="large-text">' . esc_textarea( $content ) . '</textarea>';
         echo '<p class="description">' . __( 'Usa %name% para el nombre del usuario.', 'conditions-bookingpress' ) . '</p>';
     }
+
+	public static function min_hours_cancel_callback(): void {
+		$options = get_option( 'conditions_bookingpress_options' );
+		$min_hours = $options['min_hours_cancel'] ?? 48;
+		echo '<input type="number" name="conditions_bookingpress_options[min_hours_cancel]" value="' . esc_attr( $min_hours ) . '" class="small-text">';
+	}
 
     public static function display_settings_page():void {
         include plugin_dir_path( __FILE__ ) . '../admin/views/settings-page.php';
