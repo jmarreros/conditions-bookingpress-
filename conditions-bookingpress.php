@@ -37,7 +37,6 @@ add_action( 'plugins_loaded', 'conditions_bookingpress_init' );
 
 function conditions_bookingpress_init(): void {
     Conditions_BookingPress_Cron::init();
-    Conditions_BookingPress_Database::init();
     Conditions_BookingPress_Email::init();
     Conditions_BookingPress_Reports::init();
     Conditions_BookingPress_Settings::init();

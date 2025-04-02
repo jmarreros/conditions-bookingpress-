@@ -3,7 +3,7 @@
 class Conditions_BookingPress_Plugin {
 
 	public static function init(): void {
-		error_log( print_r( 'Aqui', true ) );
+
 		register_activation_hook( CONDITIONS_BOOKINGPRESS_BASENAME, array( __CLASS__, 'activate' ) );
 		register_deactivation_hook( CONDITIONS_BOOKINGPRESS_BASENAME, array( __CLASS__, 'deactivate' ) );
 

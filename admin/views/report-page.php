@@ -9,7 +9,7 @@ if ( ! current_user_can( 'manage_options' ) ) {
 // Tabs definitions
 $plugin_tabs = [
 	'pending'   => __( 'Reservas Pendientes', 'conditions-bookingpress' ),
-	'cancelled' => __( 'Reservas Canceladas', 'conditions-bookingpress' ),
+	'cancelled' => __( 'Reservas Procesadas', 'conditions-bookingpress' ),
 	'excluded'  => __( 'Reservas Excluidas', 'conditions-bookingpress' ),
 ];
 
