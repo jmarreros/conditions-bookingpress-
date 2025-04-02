@@ -43,14 +43,15 @@ class Conditions_BookingPress_Database {
         WHERE ba.bookingpress_appointment_status = 2
         AND cb.status IS NULL
         AND TIMESTAMPDIFF(HOUR, ba.bookingpress_created_at, ba.bookingpress_appointment_date) >= %d
-        AND TIMESTAMPDIFF(HOUR, NOW(), ba.bookingpress_appointment_date) BETWEEN 0 AND %d",
+        AND TIMESTAMPDIFF(HOUR, NOW(), ba.bookingpress_appointment_date) BETWEEN 0 AND %d
+        ORDER BY ba.bookingpress_appointment_booking_id DESC",
 			$hours, $hours
 		);
 
 		return $wpdb->get_results( $query, ARRAY_A );
 	}
 
-	public static function get_procceced_appointments(): array {
+	public static function get_processed_appointments(): array {
 		global $wpdb;
 
 		$table_name    = $wpdb->prefix . 'conditions_bookingpress';
@@ -67,8 +68,36 @@ class Conditions_BookingPress_Database {
 			ba.bookingpress_created_at
 		FROM $booking_table ba
 		LEFT JOIN $table_name cb ON ba.bookingpress_appointment_booking_id = cb.bookingpress_appointment_id
-		WHERE cb.status = 1"
+		WHERE cb.status = 1
+		ORDER BY ba.bookingpress_appointment_booking_id DESC"
 		);
+
+		return $wpdb->get_results( $query, ARRAY_A );
+	}
+
+	public static function get_excluded_appointments( $hours ): array {
+		global $wpdb;
+
+		$table_name    = $wpdb->prefix . 'conditions_bookingpress';
+		$booking_table = $wpdb->prefix . 'bookingpress_appointment_bookings';
+
+		$query = $wpdb->prepare(
+			"SELECT 
+			ba.bookingpress_appointment_booking_id, 
+			ba.bookingpress_customer_firstname, 
+			ba.bookingpress_customer_lastname,
+			ba.bookingpress_service_name,
+			ba.bookingpress_appointment_date,
+			ba.bookingpress_appointment_time,
+			ba.bookingpress_created_at,
+			TIMESTAMPDIFF(HOUR, ba.bookingpress_created_at, ba.bookingpress_appointment_date) AS diff_created,
+    		TIMESTAMPDIFF(HOUR, NOW(), ba.bookingpress_appointment_date) AS diff_now
+		FROM $booking_table ba
+		LEFT JOIN $table_name cb ON ba.bookingpress_appointment_booking_id = cb.bookingpress_appointment_id
+		WHERE ba.bookingpress_appointment_status = 2
+        AND cb.status IS NULL
+        AND TIMESTAMPDIFF(HOUR, ba.bookingpress_created_at, ba.bookingpress_appointment_date) < %d
+        ORDER BY ba.bookingpress_appointment_booking_id DESC", $hours );
 
 		return $wpdb->get_results( $query, ARRAY_A );
 	}

@@ -6,6 +6,8 @@ if ( ! current_user_can( 'manage_options' ) ) {
 	return;
 }
 
+$items = $items ?? [];
+
 // Tabs definitions
 $plugin_tabs = [
 	'pending'   => __( 'Reservas Pendientes', 'conditions-bookingpress' ),
@@ -41,5 +43,33 @@ $current_tab = $_GET['tab'] ?? 'pending';
 			echo "excluded";
 	}
 	?>
+
+    <div class="tab-content">
+        <table class="wp-list-table widefat striped">
+            <thead>
+            <tr>
+                <th><?php _e( 'ID', 'conditions-bookingpress' ) ?></th>
+                <th><?php _e( 'Nombre', 'conditions-bookingpress' ) ?></th>
+                <th><?php _e( 'Apellido', 'conditions-bookingpress' ) ?></th>
+                <th><?php _e( 'Servicio', 'conditions-bookingpress' ) ?></th>
+                <th><?php _e( 'Fecha', 'conditions-bookingpress' ) ?></th>
+                <th><?php _e( 'Hora', 'conditions-bookingpress' ) ?></th>
+                <th><?php _e( 'Creado', 'conditions-bookingpress' ) ?></th>
+            </tr>
+            </thead>
+            <tbody>
+            <?php foreach ( $items as $item ): ?>
+                <tr>
+                    <td><?php echo $item['bookingpress_appointment_booking_id'] ?></td>
+                    <td><?php echo $item['bookingpress_customer_firstname'] ?></td>
+                    <td><?php echo $item['bookingpress_customer_lastname'] ?></td>
+                    <td><?php echo $item['bookingpress_service_name'] ?></td>
+                    <td><?php echo $item['bookingpress_appointment_date'] ?></td>
+                    <td><?php echo $item['bookingpress_appointment_time'] ?></td>
+                    <td><?php echo $item['bookingpress_created_at'] ?></td>
+                </tr>
+            <?php endforeach; ?>
+            </tbody>
+        </table>
 
 </div><!--wrap -->
