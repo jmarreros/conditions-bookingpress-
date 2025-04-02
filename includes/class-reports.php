@@ -11,16 +11,23 @@ class Conditions_BookingPress_Reports {
 		$hours   = $options['min_hours_cancel'] ?? 24;
 
 		$current_tab = isset( $_GET['tab'] ) ? sanitize_text_field( $_GET['tab'] ) : 'pending';
+		$page        = isset( $_GET['paged'] ) ? max( 1, intval( $_GET['paged'] ) ) : 1;
+
 		$items       = [];
+		$total_items = 0;
+		$per_page    = 20; //get_option( 'posts_per_page' );
 		switch ( $current_tab ) {
 			case 'pending':
-				$items = Conditions_BookingPress_Database::get_pending_appointments( $hours );
+				$total_items = Conditions_BookingPress_Database::get_total_pending_appointments( $hours );
+				$items       = Conditions_BookingPress_Database::get_pending_appointments( $hours, $page, $per_page );
 				break;
 			case 'cancelled':
-				$items = Conditions_BookingPress_Database::get_processed_appointments();
+				$total_items = Conditions_BookingPress_Database::get_total_processed_appointments();
+				$items       = Conditions_BookingPress_Database::get_processed_appointments( $page, $per_page );
 				break;
 			case 'excluded':
-				$items = Conditions_BookingPress_Database::get_excluded_appointments( $hours );
+				$total_items = Conditions_BookingPress_Database::get_total_excluded_appointments( $hours );
+				$items       = Conditions_BookingPress_Database::get_excluded_appointments( $hours, $page, $per_page );
 				break;
 		}
 

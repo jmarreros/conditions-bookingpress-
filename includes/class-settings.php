@@ -84,20 +84,20 @@ class Conditions_BookingPress_Settings {
     public static function email_subject_callback():void {
         $options = get_option( 'conditions_bookingpress_options' );
         $subject = $options['email_subject'] ?? '';
-        echo '<input type="text" name="conditions_bookingpress_options[email_subject]" value="' . esc_attr( $subject ) . '" class="regular-text">';
+        echo '<input type="text" name="conditions_bookingpress_options[email_subject]" value="' . esc_attr( $subject ) . '" class="regular-text" required>';
     }
 
     public static function email_content_callback():void {
         $options = get_option( 'conditions_bookingpress_options' );
         $content = $options['email_content'] ?? '';
-        echo '<textarea name="conditions_bookingpress_options[email_content]" rows="10" cols="50" class="large-text">' . esc_textarea( $content ) . '</textarea>';
+        echo '<textarea name="conditions_bookingpress_options[email_content]" rows="10" cols="50" class="large-text" required>' . esc_textarea( $content ) . '</textarea>';
         echo '<p class="description">' . __( 'Usa %name% para el nombre del usuario.', 'conditions-bookingpress' ) . '</p>';
     }
 
 	public static function min_hours_cancel_callback(): void {
 		$options = get_option( 'conditions_bookingpress_options' );
 		$min_hours = $options['min_hours_cancel'] ?? 48;
-		echo '<input type="number" name="conditions_bookingpress_options[min_hours_cancel]" value="' . esc_attr( $min_hours ) . '" class="small-text">';
+		echo '<input type="number" name="conditions_bookingpress_options[min_hours_cancel]" value="' . esc_attr( $min_hours ) . '" class="small-text" min="24" step="1">';
 	}
 
     public static function display_settings_page():void {
