@@ -71,7 +71,7 @@ class Conditions_BookingPress_Settings {
     public static function sanitize( $options ) {
         $options['email_enabled'] = isset( $options['email_enabled'] ) ? 1 : 0;
         $options['email_subject'] = sanitize_text_field( $options['email_subject'] );
-        $options['email_content'] = sanitize_textarea_field( $options['email_content'] );
+        $options['email_content'] = $options['email_content'];
         return $options;
     }
 
@@ -91,7 +91,7 @@ class Conditions_BookingPress_Settings {
         $options = get_option( 'conditions_bookingpress_options' );
         $content = $options['email_content'] ?? '';
         echo '<textarea name="conditions_bookingpress_options[email_content]" rows="10" cols="50" class="large-text" required>' . esc_textarea( $content ) . '</textarea>';
-        echo '<p class="description">' . __( 'Usa %name% para el nombre del usuario.', 'conditions-bookingpress' ) . '</p>';
+        echo '<p class="description">' . __( 'Usa %name% para el nombre del usuario, %contacto% para el enlace a la página de contacto.', 'conditions-bookingpress' ) . '</p>';
     }
 
 	public static function min_hours_cancel_callback(): void {

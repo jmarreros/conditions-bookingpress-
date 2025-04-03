@@ -90,6 +90,7 @@ class Conditions_BookingPress_Database {
 			        ba.bookingpress_appointment_date,
 			        ba.bookingpress_appointment_time,
 			        ba.bookingpress_created_at,
+			        ba.bookingpress_customer_email,
 			        TIMESTAMPDIFF(HOUR, ba.bookingpress_created_at, ba.bookingpress_appointment_date) AS diff_created,
 			        TIMESTAMPDIFF(HOUR, NOW(), ba.bookingpress_appointment_date) AS diff_now
 					    FROM $booking_table ba
