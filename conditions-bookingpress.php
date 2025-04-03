@@ -28,6 +28,7 @@ require_once CONDITIONS_BOOKINGPRESS_PATH . 'includes/class-email.php';
 require_once CONDITIONS_BOOKINGPRESS_PATH . 'includes/class-reports.php';
 require_once CONDITIONS_BOOKINGPRESS_PATH . 'includes/class-settings.php';
 require_once CONDITIONS_BOOKINGPRESS_PATH . 'includes/class-plugin.php';
+require_once CONDITIONS_BOOKINGPRESS_PATH . 'includes/class-process.php';
 require_once CONDITIONS_BOOKINGPRESS_PATH . 'admin/class-admin-menu.php';
 
 // Inicializar plugin
@@ -41,4 +42,5 @@ function conditions_bookingpress_init(): void {
     Conditions_BookingPress_Reports::init();
     Conditions_BookingPress_Settings::init();
     Conditions_BookingPress_Admin_Menu::init();
+	Conditions_BookingPress_Process::init();
 }
