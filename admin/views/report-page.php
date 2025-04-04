@@ -63,6 +63,7 @@ $current_tab = $_GET['tab'] ?? 'pending';
             <thead>
             <tr>
                 <th><?php _e( 'ID', 'conditions-bookingpress' ) ?></th>
+                <th><?php _e( '#ID', 'conditions-bookingpress' ) ?></th>
                 <th><?php _e( 'Fecha Cita', 'conditions-bookingpress' ) ?></th>
 				<?php
 				if ( $current_tab == 'pending' ) : ?>
@@ -80,6 +81,7 @@ $current_tab = $_GET['tab'] ?? 'pending';
             <tbody>
 			<?php foreach ( $items as $item ): ?>
                 <tr>
+                    <td><?php echo $item['bookingpress_appointment_booking_id'] ?></td>
                     <td><?php echo "#" . $item['bookingpress_booking_id'] ?></td>
                     <td><?php echo $item['bookingpress_appointment_date'] ?></td>
 					<?php if ( $current_tab == 'pending' ) : ?>

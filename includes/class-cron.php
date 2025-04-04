@@ -6,13 +6,13 @@ class Conditions_BookingPress_Cron {
         add_action( 'conditions_bookingpress_cron_event', array( __CLASS__, 'cron_task' ) );
     }
 
-    public static function activate() {
+    public static function activate() :void{
         if ( ! wp_next_scheduled( 'conditions_bookingpress_cron_event' ) ) {
             wp_schedule_event( time(), 'twicedaily', 'conditions_bookingpress_cron_event' );
         }
     }
 
-    public static function deactivate() {
+    public static function deactivate() :void{
         wp_clear_scheduled_hook( 'conditions_bookingpress_cron_event' );
     }
 

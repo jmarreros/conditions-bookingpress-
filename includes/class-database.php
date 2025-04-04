@@ -182,18 +182,14 @@ class Conditions_BookingPress_Database {
 			array( 'bookingpress_appointment_booking_id' => $id )
 		);
 
-		$wpdb->replace(
+		$wpdb->insert(
 			$table_name,
 			array(
 				'bookingpress_appointment_id' => $id,
-				'status'                      => 1,
-				'datetime'                    => current_time( 'mysql' )
-			),
-			array(
-				'%d',
-				'%d',
-				'%s'
+				'status'                     => 1,
+				'datetime'                   => current_time( 'mysql' ),
 			)
 		);
+
 	}
 }

@@ -23,10 +23,11 @@ class Conditions_BookingPress_Process {
 	}
 
 	public static function process_pending_appointments(): void {
+
 		$options     = get_option( 'conditions_bookingpress_options' );
 		$hours       = $options['min_hours_cancel'] ?? 24;
 		$send_emails = $options['email_enabled'] ?? true;
-		$per_page    = 5;
+		$per_page    = get_option( 'posts_per_page' ) ?? 20;
 
 		// Process pending appointments
 		$pending_appointments = Conditions_BookingPress_Database::get_pending_appointments( $hours, 1, $per_page );
