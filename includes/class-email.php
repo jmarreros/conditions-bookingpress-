@@ -5,13 +5,13 @@ class Conditions_BookingPress_Email {
 		$subject = $options['email_subject'];
 		$content = $options['email_content'];
 
-		if ( empty( $user_name ) || ! empty( $user_email ) ) {
+		if ( empty( $user_email ) ) {
 			return;
 		}
 
 		$content = str_replace( '%name%', $user_name, $content );
 
-		$contact_url   = get_site_url() . 'contacto';
+		$contact_url   = get_site_url() . '/contacto';
 		$contacto_html = '<a href="' . $contact_url . '">' . __( 'contáctanos', 'conditions-bookingpress' ) . '</a>';
 		$content       = str_replace( '%contacto%', $contacto_html, $content );
 

@@ -23,15 +23,15 @@ $current_tab = $_GET['tab'] ?? 'pending';
 ?>
 <div class="wrap">
     <div class="heading-flex">
-    <h1 class="wp-heading-inline"><?php _e( 'Reservas Detectadas', 'conditions-bookingpress' ) ?></h1>
+        <h1 class="wp-heading-inline"><?php _e( 'Reservas Detectadas', 'conditions-bookingpress' ) ?></h1>
 
-	<?php if ( $current_tab == 'pending' ) : ?>
-        <form method="post" action="<?php echo admin_url( 'admin-post.php' ); ?>">
-            <input type="hidden" name="action" value="process_pending_appointments">
-			<?php wp_nonce_field( 'process_pending_appointments_nonce', 'process_pending_appointments_nonce_field' ); ?>
-            <button type="submit" class="page-title-action">Procesar Pendientes</button>
-        </form>
-	<?php endif; ?>
+		<?php if ( $current_tab == 'pending' ) : ?>
+            <form method="post" action="<?php echo admin_url( 'admin-post.php' ); ?>">
+                <input type="hidden" name="action" value="process_pending_appointments">
+				<?php wp_nonce_field( 'process_pending_appointments_nonce', 'process_pending_appointments_nonce_field' ); ?>
+                <button type="submit" class="page-title-action">Procesar Pendientes</button>
+            </form>
+		<?php endif; ?>
 
     </div>
 
@@ -72,15 +72,15 @@ $current_tab = $_GET['tab'] ?? 'pending';
                 <th><?php _e( 'Apellidos', 'conditions-bookingpress' ) ?></th>
                 <th><?php _e( 'Servicio', 'conditions-bookingpress' ) ?></th>
                 <th><?php _e( 'Creado', 'conditions-bookingpress' ) ?></th>
-                <?php if ( $current_tab == 'cancelled' ) : ?>
+				<?php if ( $current_tab == 'cancelled' ) : ?>
                     <th><?php _e( 'Cancelado automático', 'conditions-bookingpress' ) ?></th>
-                <?php endif ?>
+				<?php endif ?>
             </tr>
             </thead>
             <tbody>
 			<?php foreach ( $items as $item ): ?>
                 <tr>
-                    <td><?php echo $item['bookingpress_appointment_booking_id'] ?></td>
+                    <td><?php echo "#" . $item['bookingpress_booking_id'] ?></td>
                     <td><?php echo $item['bookingpress_appointment_date'] ?></td>
 					<?php if ( $current_tab == 'pending' ) : ?>
                         <td><?php echo $item['diff_now'] ?></td>
@@ -89,9 +89,9 @@ $current_tab = $_GET['tab'] ?? 'pending';
                     <td><?php echo $item['bookingpress_customer_lastname'] ?></td>
                     <td><?php echo $item['bookingpress_service_name'] ?></td>
                     <td><?php echo $item['bookingpress_created_at'] ?></td>
-                    <?php if ( $current_tab == 'cancelled' ) : ?>
+					<?php if ( $current_tab == 'cancelled' ) : ?>
                         <td><?php echo $item['cb_datetime'] ?></td>
-                    <?php endif ?>
+					<?php endif ?>
                 </tr>
 			<?php endforeach; ?>
             </tbody>
@@ -119,9 +119,10 @@ $current_tab = $_GET['tab'] ?? 'pending';
         .tablenav-pages a.current {
             border: none !important;
         }
+
         .heading-flex {
             display: flex;
             justify-content: space-between;
-            align-items:baseline;
+            align-items: baseline;
         }
     </style>

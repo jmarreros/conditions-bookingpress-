@@ -16,9 +16,7 @@ class Conditions_BookingPress_Cron {
         wp_clear_scheduled_hook( 'conditions_bookingpress_cron_event' );
     }
 
-    public static function cron_task() {
-        // Lógica para cambiar el registro en la BD
-        Conditions_BookingPress_Database::update_record();
-        Conditions_BookingPress_Email::send_notifications();
+    public static function cron_task(): void {
+		Conditions_BookingPress_Process::process_pending_appointments();
     }
 }

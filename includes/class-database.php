@@ -34,7 +34,7 @@ class Conditions_BookingPress_Database {
 			        WHERE ba.bookingpress_appointment_status = 2
 			        AND cb.status IS NULL
 			        AND TIMESTAMPDIFF(HOUR, ba.bookingpress_created_at, ba.bookingpress_appointment_date) >= %d
-			        AND TIMESTAMPDIFF(HOUR, NOW(), ba.bookingpress_appointment_date) BETWEEN 0 AND %d",
+				    AND TIMESTAMPDIFF(HOUR, NOW(), ba.bookingpress_appointment_date) < %d",
 			$hours, $hours
 		);
 
@@ -84,6 +84,7 @@ class Conditions_BookingPress_Database {
 		$query = $wpdb->prepare(
 			"SELECT 
 			        ba.bookingpress_appointment_booking_id, 
+			        ba.bookingpress_booking_id,
 			        ba.bookingpress_customer_firstname, 
 			        ba.bookingpress_customer_lastname,
 			        ba.bookingpress_service_name,
@@ -119,6 +120,7 @@ class Conditions_BookingPress_Database {
 		$query = $wpdb->prepare(
 			"SELECT 
 			ba.bookingpress_appointment_booking_id, 
+			ba.bookingpress_booking_id,
 			ba.bookingpress_customer_firstname, 
 			ba.bookingpress_customer_lastname,
 			ba.bookingpress_service_name,
@@ -147,6 +149,7 @@ class Conditions_BookingPress_Database {
 		$query = $wpdb->prepare(
 			"SELECT 
 			ba.bookingpress_appointment_booking_id, 
+			ba.bookingpress_booking_id,
 			ba.bookingpress_customer_firstname, 
 			ba.bookingpress_customer_lastname,
 			ba.bookingpress_service_name,

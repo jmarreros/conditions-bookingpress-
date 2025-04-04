@@ -15,7 +15,7 @@ class Conditions_BookingPress_Reports {
 
 		$items       = [];
 		$total_items = 0;
-		$per_page    = 20; //get_option( 'posts_per_page' );
+		$per_page    = 30; //get_option( 'posts_per_page' );
 		switch ( $current_tab ) {
 			case 'pending':
 				$total_items = Conditions_BookingPress_Database::get_total_pending_appointments( $hours );

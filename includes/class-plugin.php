@@ -13,12 +13,12 @@ class Conditions_BookingPress_Plugin {
 	public static function activate(): void {
 		error_log( print_r( 'Activando plugin', true ) );
 
-//        Conditions_BookingPress_Cron::activate();
+        Conditions_BookingPress_Cron::activate();
 		Conditions_BookingPress_Database::create_table();
 	}
 
 	public static function deactivate(): void {
-//        Conditions_BookingPress_Cron::deactivate();
+        Conditions_BookingPress_Cron::deactivate();
 	}
 
 	public static function add_action_links( $links ) {
